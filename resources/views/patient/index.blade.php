@@ -8,13 +8,18 @@
 
 @section('content')
 <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row mt-2 mx-2 py-1 float-right">
+                <a href="{{ route('patients.create') }}" class="btn btn-primary">Add Record</a>
+            </div>
+        </div>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="row mt-2 mx-2 py-1">
-                        <a href="#" class="btn btn-primary btn-sm">Add Record</a>
-                    </div>
+            
             <div class="card">
-                <div class="card-header">{{ __('Employers List') }}
+                <div class="card-header">{{ __('Patients List') }}
                     
                 </div>
 
@@ -24,34 +29,39 @@
                         <table id="myTable" class="display" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Gender</th>
                                     <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>Registered date</th>
+                                    <th>Ref. No</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011/04/25</td>
-                                    <td>$320,800</td>
-                                </tr>
-                                <tr>
-                                    <td>Garrett Winters</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                    <td>63</td>
-                                    <td>2011/07/25</td>
-                                    <td>$170,750</td>
-                                </tr>
+                                @if ($patients->count() > 0)
+                                    @foreach ($patients as $patient)
+                                        <tr>
+                                            <td>{{ $patient->fName }}</td>
+                                            <td>{{ $patient->lName }}</td>
+                                            <td>{{ $patient->sex }}</td>
+                                            <td>{{ $patient->bDay }}</td>
+                                            <td>{{ $patient->regDate }}</td>
+                                            <td>{{ $patient->refNo }}</td>
+                                            <td>
+                                                <a href="{{ route('patients.edit', $patient->id) }}"><img src="{{ asset('assets/svgs/pen.svg') }}" alt="Bootstrap" width="16" height="16"></span></a>
+                                                <a href="#"><img src="{{ asset('assets/svgs/journal-x.svg') }}" alt="Bootstrap" width="16" height="16"></a>
+                                                {{-- <a href="{{ route('patients.destroy', $patient->id) }}"><img src="{{ asset('assets/svgs/trash.svg') }}" alt="Bootstrap" width="16" height="16"></a> --}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                {{-- No need a code here --}}
+                                @endif
+                                
                                 
                             </tbody>
-                            <tfoot>
+                            {{-- <tfoot>
                                 <tr>
                                     <th>Name</th>
                                     <th>Position</th>
@@ -60,12 +70,29 @@
                                     <th>Start date</th>
                                     <th>Salary</th>
                                 </tr>
-                            </tfoot>
+                            </tfoot> --}}
                         </table>
                     </div>
                     
                 </div>
             </div>
+            <p></p>
+            @if (session()->has('msgSuccess'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Great! </strong> {{ session()->get('msgSuccess') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>         
+            @endif
+            @if (session()->has('dltMsg'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>OK! </strong> {{ session()->get('msgSuccess') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>         
+            @endif
         </div>
     </div>
 </div>

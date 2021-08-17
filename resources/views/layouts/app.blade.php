@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'MyClinic') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -15,6 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -39,10 +40,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a href="#" class="nav-link">Dashboard</a>
+                            <a href="{{ route('home') }}" class="nav-link">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('patients') }}" class="nav-link">Patient Management</a>
+                            <a href="{{ route('patients.index') }}" class="nav-link">Patient Management</a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">Drugs Management</a>
