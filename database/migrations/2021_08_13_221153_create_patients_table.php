@@ -28,7 +28,8 @@ class CreatePatientsTable extends Migration
             $table->string('grdName', 200)->nullable();
             $table->string('grdPhnNmbr', 10)->nullable();
             $table->dateTime('regDate');
-            $table->string('refNo', 15)->nullable();
+            $table->dateTime('edtDate')->nullable();
+            $table->text('refNo')->nullable();
             $table->string('isActive');
         });
     }

@@ -19,10 +19,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
     @yield('mycss')
-
     @yield('css')
+    @livewireStyles
 
 </head>
 <body style="background-color: rgb(230, 232, 235)">
@@ -46,7 +45,7 @@
                             <a href="{{ route('patients.index') }}" class="nav-link">Patient Management</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Drugs Management</a>
+                            <a href="{{ route('drug') }}" class="nav-link">Drugs Management</a>
                         </li>
                     </ul>
 
@@ -100,8 +99,9 @@
     background-color: rgba(52, 134, 226, 0.9);
     color: white;
     text-align: center;">
-        <p class="text-light">2021 All Rights Received | Koralaima Medical Center</p>
+        <p class="text-light">2021 &#174 All Rights Received | Koralaima Medical Center</p>
     </footer>
     @stack('scripts')
+    @livewireScripts
 </body>
 </html>

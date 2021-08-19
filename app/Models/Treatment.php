@@ -20,7 +20,7 @@ class Treatment extends Model
 
     public function Patient()
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(Patient::class, 'patient_id');
     }
 
     public function Issues()

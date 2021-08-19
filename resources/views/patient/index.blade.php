@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('css')
-    
-    {{-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" > --}}
     <link rel="stylesheet" href="{{ asset('assets/dt/jquery.dataTables.min.css') }}"
 @endsection
 
@@ -11,7 +9,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row mt-2 mx-2 py-1 float-right">
-                <a href="{{ route('patients.create') }}" class="btn btn-primary">Add Record</a>
+                <a href="{{ route('patients.create') }}" class="btn btn-primary">Add Patient</a>
             </div>
         </div>
     </div>
@@ -49,8 +47,8 @@
                                             <td>{{ $patient->regDate }}</td>
                                             <td>{{ $patient->refNo }}</td>
                                             <td>
-                                                <a href="{{ route('patients.edit', $patient->id) }}"><img src="{{ asset('assets/svgs/pen.svg') }}" alt="Bootstrap" width="16" height="16"></span></a>
-                                                <a href="#"><img src="{{ asset('assets/svgs/journal-x.svg') }}" alt="Bootstrap" width="16" height="16"></a>
+                                                <a href="{{ route('patients.edit', $patient->id) }}" data-toggle="tooltip" title="Edit"><img src="{{ asset('assets/svgs/pen.svg') }}" alt="Bootstrap" width="16" height="16"></span></a>
+                                                <a href="{{ route('patients.show', $patient->id) }}"><img src="{{ asset('assets/svgs/journal-x.svg') }}" alt="Bootstrap" width="16" height="16" data-toggle="tooltip" title="View"></a>
                                                 {{-- <a href="{{ route('patients.destroy', $patient->id) }}"><img src="{{ asset('assets/svgs/trash.svg') }}" alt="Bootstrap" width="16" height="16"></a> --}}
                                             </td>
                                         </tr>
@@ -58,8 +56,6 @@
                                 @else
                                 {{-- No need a code here --}}
                                 @endif
-                                
-                                
                             </tbody>
                             {{-- <tfoot>
                                 <tr>
@@ -105,5 +101,9 @@
         $(document).ready( function () {
             $('#myTable').DataTable();
         } );
+        // tooltip initialising script
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
     </script>
 @endpush
