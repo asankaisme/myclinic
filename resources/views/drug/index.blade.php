@@ -7,6 +7,8 @@
 @section('content')
     <div class="container">
         @livewire('add-drug')
+        <br>
+        @livewire('drug-table')
     </div>
 @endsection
 

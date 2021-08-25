@@ -37,6 +37,6 @@ class Patient extends Model
 
     public function Treatments()
     {
-        return $this->hasMany(Treatment::class, 'patient_id');
+        return $this->hasMany(Treatment::class, 'patient_id')->orderBy('id', 'desc')->limit(5);
     }
 }

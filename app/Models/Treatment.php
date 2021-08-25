@@ -25,6 +25,6 @@ class Treatment extends Model
 
     public function Issues()
     {
-        return $this->hasMany(Issue::class);
+        return $this->hasMany(Issue::class, 'treatment_id');
     }
 }

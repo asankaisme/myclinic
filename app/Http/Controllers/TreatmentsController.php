@@ -26,11 +26,12 @@ class TreatmentsController extends Controller
             'diagnosis' => 'required'
         ]);
 
-        $diagnosis = Treatment::create([
+        $treatment = Treatment::create([
             'patient_id' => $request->patient_id,
             'diagnosis' => $request->diagnosis,
             'isActive' => 'A'
         ]);
         $request->session()->flash('msgSuccess', 'Patient record successfully added.');
+        return redirect()->route('issues.create', $treatment->id);
     }
 }
