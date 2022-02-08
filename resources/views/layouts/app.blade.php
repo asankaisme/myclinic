@@ -24,7 +24,7 @@
     @livewireStyles
 
 </head>
-<body style="background-color: rgb(230, 232, 235)">
+<body style="background-color: rgb(229, 235, 243)">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: rgba(52, 134, 226, 0.9)">
             <div class="container">
@@ -45,7 +45,7 @@
                             <a href="{{ route('patients.index') }}" class="nav-link">Patient Management</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('drug') }}" class="nav-link">Drugs Management</a>
+                            <a href="{{ route('drugs.index') }}" class="nav-link">Drugs Management</a>
                         </li>
                     </ul>
 
@@ -99,7 +99,7 @@
     background-color: rgba(52, 134, 226, 0.9);
     color: white;
     text-align: center;">
-        <p class="text-light">2021 &#174 All Rights Received | Koralaima Medical Center</p>
+        <p class="text-light">{{ \Carbon\Carbon::now()->format('Y') }} &#174 All Rights Received | Koralaima Medical Center</p>
     </footer>
     @stack('scripts')
     @livewireScripts

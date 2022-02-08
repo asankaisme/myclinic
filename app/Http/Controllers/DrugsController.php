@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Drug;
 use Illuminate\Http\Request;
 
 class DrugsController extends Controller
@@ -13,7 +14,8 @@ class DrugsController extends Controller
      */
     public function index()
     {
-        //
+        $drugs = Drug::all();
+        return view('drug.index', compact('drugs'));
     }
 
     /**
@@ -34,7 +36,18 @@ class DrugsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'drgNme' => 'required|max:100',
+            'avlQty' => 'required',
+            'rol' => 'required',
+        ]);
+        $newDrug = Drug::create([
+            'drgNme' => $request->drgNme,
+            'avlQty' => $request->avlQty,
+            'rol' => $request->rol,
+        ]);
+        $request->session()->flash('msgSuccess', 'New drug successfully added.');
+        return redirect()->route('drugs.index');
     }
 
     /**

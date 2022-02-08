@@ -7,10 +7,10 @@ use Livewire\Component;
 
 class AddDrug extends Component
 {
-    public $drgNme;
-    public $avlQty;
-    public $rol;
-    public $isActive;
+    public $drug, $drgNme, $drug_id, $avlQty, $rol, $isActive;
+    public $updateStatus;
+
+    protected $listners = ['selectedDrug'];
 
     public function mount()
     {
@@ -34,4 +34,19 @@ class AddDrug extends Component
         session()->flash('msgSuccess', 'New drug successfully added.');
         return redirect()->route('drug');
     }
+    //method for searching specific drug
+    public function edit($drug_id, $updateStatus)
+    {
+        $drug = Drug::findOrFail($drug_id);
+        return view('livewire.add-drug', compact('drug', 'updateStatus'));
+        $this->drug_id = $drug_id;
+        $this->drgNme = $drug->drgName;
+        $this->avlQty = $drug->avlQty;
+        $this->rol = $drug->rol;
+    }
+
+    // public function selectedDrug(Drug $drug)
+    // {   
+    //     dd($this->drgNme = $drug->drgNme);
+    // }
 }

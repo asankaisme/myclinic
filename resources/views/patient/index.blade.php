@@ -16,8 +16,8 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             
-            <div class="card">
-                <div class="card-header">{{ __('Patients List') }}
+            <div class="card border-primary">
+                <div class="card-header bg-transparent border-primary">{{ __('Patients List') }}
                     
                 </div>
 
@@ -49,6 +49,7 @@
                                             <td>
                                                 <a href="{{ route('patients.edit', $patient->id) }}" data-toggle="tooltip" title="Edit"><img src="{{ asset('assets/svgs/pen.svg') }}" alt="Bootstrap" width="16" height="16"></span></a>
                                                 <a href="{{ route('patients.show', $patient->id) }}"><img src="{{ asset('assets/svgs/journal-x.svg') }}" alt="Bootstrap" width="16" height="16" data-toggle="tooltip" title="View"></a>
+                                                <a href="#"><img src="{{ asset('assets/svgs/book-svgrepo-com.svg') }}" alt="Bootstrap" width="16" height="16" data-toggle="tooltip" title="History"></a>
                                                 {{-- <a href="{{ route('patients.destroy', $patient->id) }}"><img src="{{ asset('assets/svgs/trash.svg') }}" alt="Bootstrap" width="16" height="16"></a> --}}
                                             </td>
                                         </tr>

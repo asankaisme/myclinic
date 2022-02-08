@@ -23,7 +23,7 @@ class TreatmentsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'diagnosis' => 'required'
+            'diagnosis' => 'required|max:500'
         ]);
 
         $treatment = Treatment::create([
@@ -32,6 +32,6 @@ class TreatmentsController extends Controller
             'isActive' => 'A'
         ]);
         $request->session()->flash('msgSuccess', 'Patient record successfully added.');
-        return redirect()->route('issues.create', $treatment->id);
+        return redirect()->route('issues.create', [$treatment->id, $request->patient_id]);
     }
 }

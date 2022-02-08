@@ -18,6 +18,8 @@ class Treatment extends Model
         'diagnosis'
     ];
 
+    protected $dates = ['created_at'];
+
     public function Patient()
     {
         return $this->belongsTo(Patient::class, 'patient_id');

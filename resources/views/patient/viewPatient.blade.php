@@ -5,82 +5,88 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="row mt-2 mx-2 py-1 float-right">
-                    <a href="{{ route('treatments.create', $patient->id) }}" class="btn btn-primary">Add New Diagnosis</a>
+                    {{-- <a href="{{ route('treatments.create', $patient->id) }}" class="btn btn-primary">Add New Diagnosis</a> --}}
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <p>Patient's Treatment History</p>
+                <div class="card border-primary">
+                    <div class="card-header bg-transparent border-primary">
+                        <p>New Diagnosis for : <span class="text-primary"> {{ $patient->fName }} {{ $patient->lName }}</span></p>
                     </div>
                     <div class="card-body">
-                        <div class="card" style="width: 500px;">
-                            <div class="row no-gutters">
-                                <div class="col-sm-5">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <div class="card border-primary" style="width: 18rem;">
                                     @if ($patient->sex == 'M')
-                                        <img class="card-img" src="{{ asset('assets/imgs/male.png') }}" alt="{{ $patient->fName }} Card">
+                                        <img class="card-img-top" src="{{ asset('assets/imgs/male.png') }}" alt="{{ $patient->fName }} Card">
                                     @else
-                                        <img class="card-img" src="{{ asset('assets/imgs/female.png') }}" alt="{{ $patient->fName }} Card">
+                                        <img class="card-img-top" src="{{ asset('assets/imgs/female.png') }}" alt="{{ $patient->fName }} Card">
                                     @endif
-                                </div>
-                                <div class="col-sm-7">
+                                    {{-- <img src="..." class="card-img-top" alt="..."> --}}
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ $patient->fName }} {{ $patient->lName }} | {{ $patient->age() }}y</h5>
-                                        @if ($patient->bldGrp == "1")
-                                            <p class="card-text">Blood Group : A+</p>
-                                        @elseif ($patient->bldGrp == "2")
-                                            <p class="card-text">Blood Group : A-</p>
-                                        @elseif ($patient->bldGrp == "3")
-                                            <p class="card-text">Blood Group : B+</p>
-                                        @elseif ($patient->bldGrp == "4")
-                                            <p class="card-text">Blood Group : B-</p>
-                                        @elseif ($patient->bldGrp == "5")
-                                            <p class="card-text">Blood Group : AB+</p>
-                                        @elseif ($patient->bldGrp == "6")
-                                            <p class="card-text">Blood Group : AB-</p>
-                                        @elseif ($patient->bldGrp == "7")
-                                            <p class="card-text">Blood Group : O+</p>
-                                        @elseif($patient->bldGrp == "8")
-                                            <p class="card-text">Blood Group : O-</p>
-                                        @endif
-                                        
-                                        <p class="card-text">Birthday : {{ $patient->bDay }}</p>
-                                        <p class="card-text">Phone Number : {{ $patient->phnNmbr }}</p>
+                                      <h5 class="card-title"><span class="text-primary">{{ $patient->age() }}y</span></h5>
+                                        <p class="card-text">
+                                            @if ($patient->bldGrp == "1")
+                                                <p class="card-text">Blood Group : <span class="text-primary">A+</span></p>
+                                            @elseif ($patient->bldGrp == "2")
+                                                <p class="card-text">Blood Group : <span class="text-primary">A-</span></p>
+                                            @elseif ($patient->bldGrp == "3")
+                                                <p class="card-text">Blood Group : <span class="text-primary">B+</span></p>
+                                            @elseif ($patient->bldGrp == "4")
+                                                <p class="card-text">Blood Group : <span class="text-primary">B-</span></p>
+                                            @elseif ($patient->bldGrp == "5")
+                                                <p class="card-text">Blood Group : <span class="text-primary">AB+</span></p>
+                                            @elseif ($patient->bldGrp == "6")
+                                                <p class="card-text">Blood Group : <span class="text-primary">AB-</span></p>
+                                            @elseif ($patient->bldGrp == "7")
+                                                <p class="card-text">Blood Group : <span class="text-primary">O+</span></p>
+                                            @elseif($patient->bldGrp == "8")
+                                                <p class="card-text">Blood Group : <span class="text-primary">O-</span></p>
+                                            @endif
+                                        </p>
+                                        <p class="card-text">Birthday : <span class="text-primary">{{ $patient->bDay }}</span></p>
+                                        <p class="card-text">Phone Number : <span class="text-primary">{{ $patient->phnNmbr }}</span></p>
                                     </div>
-                                </div>
+                                  </div>
                             </div>
-                            
+                            {{-- text area for diagnosis report --}}
+                            <div class="col-md-8">
+                                {{-- livewire component must go here --}}
+                                {{-- @livewire('PatientDiagnosis', ['patient_id' => $patient->id]) --}}
+                                {{-- @livewire('PatientDiagnosis', ['patient' => $patient]) --}}
+                                <form action="{{ route('treatments.store') }}" method="post">
+                                    {{-- @method("PUT") --}}
+                                    @csrf
+                                    <input type="hidden" name="patient_id" value="{{ $patient->id }}">
+                                    <textarea name="diagnosis" name="diagnosis" cols="85" rows="20" placeholder="Write the diagnosis here!"></textarea>
+                                        @error('diagnosis')
+                                            <p style="color: red">{{ $message }}</p>
+                                        @enderror
+                                        <br>
+                                    <div class="row float-right">
+                                        <a href="{{ route('patients.index') }}" class="btn btn-outline-dark btn-sm mx-1">Back</a>
+                                        <button type="submit" class="btn btn-sm btn-primary">Add Report</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="accordion" id="accordionExample">
-                    @foreach ($treatments as $treatment)
-                        <div class="card">
-                            <div class="card-header" id="heading{{ $treatment->id }}">
-                                <h2 class="mb-0">
-                                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse{{ $treatment->id }}" aria-expanded="false" aria-controls="collapse{{ $treatment->id }}">
-                                    Diagnosis Report on: {{ $treatment->created_at }}
-                                </button>
-                                </h2>
-                            </div>
-                            <div id="collapse{{ $treatment->id }}" class="collapse show" aria-labelledby="heading{{ $treatment->id }}" data-parent="#accordionExample">
-                                <div class="card-body">
-                                    {{ $treatment->diagnosis }}
-                                </div>
-                            </div>
-                        </div>    
-                    @endforeach
+                    {{-- <div class="row mt-2 mx-2 py-1 float-right">
+                        <a href="{{ route('patients.index') }}" class="btn btn-outline-dark btn-sm">Back</a>
+                    </div> --}}
                 </div>
             </div>
         </div>
+        <br>
         <div class="row">
-            <div class="col-md-12">
-                <div class="row mt-2 mx-2 py-1 float-right">
-                    <a href="{{ route('patients.index') }}" class="btn btn-outline-dark">Back</a>
-                </div>
+            <div class="col-md-4">
+                {{-- @livewire('PatientHistory', ['patientId' => $patient->id]) --}}
+            </div>
+            <div class="col-md-6">
             </div>
         </div>
+        
     </div>
 @endsection

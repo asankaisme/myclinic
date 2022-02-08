@@ -79,9 +79,9 @@ class PatientsController extends Controller
     {
         try {
             $patient = Patient::find($id);
-            $treatments = $patient->Treatments;
+            //$treatments = $patient->Treatments;
             // dd($treatments);
-            return view('patient.viewPatient', compact('patient', 'treatments'));
+            return view('patient.viewPatient', compact('patient'));
         } catch (\Throwable $th) {
             //throw $th;
         }
